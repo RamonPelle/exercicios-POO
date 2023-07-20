@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Banco {
-    private int idBanco = 0;
+    private int idBanco;
+    private static int numBancos = 0;
     private static int idConta = 99;
     private final static int LIMITE_DE_CONTAS = 10;
     private int numContas = 0;
@@ -12,11 +13,11 @@ public class Banco {
     private List<Conta> contas = new ArrayList<>();
 
     public Banco() {
-
+        this.idBanco = ++numBancos;
     }
-    public Banco(String nome, int idBanco) {
+    public Banco(String nome) {
         this.nome = nome;
-        this.idBanco = idBanco;
+        this.idBanco = ++numBancos;
     }
 
     public int getIdBanco() {
@@ -34,6 +35,7 @@ public class Banco {
     public int getNumContas() {
         return numContas;
     }
+    public int getNumBancos(){ return numBancos; }
 
     public List<Conta> getContas() {
         return contas;
