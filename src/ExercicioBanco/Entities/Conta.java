@@ -4,14 +4,18 @@ public class Conta {
     private int numero;
     private String cliente;
     private Double saldo = 0.0;
-    private Double limite = 0.0;
 
     public Conta() {
 
     }
-    public Conta(String cliente, Double limite) {
+
+    public Conta(String cliente) {
         this.cliente = cliente;
-        this.limite = limite;
+    }
+
+    public Conta(String cliente, Double saldo){
+        this.cliente = cliente;
+        this.saldo = saldo;
     }
 
     public int getNumero() {
@@ -33,12 +37,8 @@ public class Conta {
     public Double getSaldo() {
         return saldo;
     }
-
-    public Double getLimite() {
-        return limite;
-    }
-    public void defineLimite(Double limite) {
-        this.limite = limite;
+    public void setSaldo(Double saldo){
+        this.saldo = saldo;
     }
 
     public void deposita(Double quantidade){
@@ -46,26 +46,16 @@ public class Conta {
 
     }
     public void saca(Double quantidade){
-        if(this.saldo + this.limite >= quantidade) {
+        if(this.saldo >= quantidade) {
             System.out.println(this.saldo);
-            System.out.println(this.limite);
-            this.saldo -= quantidade;
+            this.setSaldo(this.getSaldo() - quantidade);
         }
     }
 
     public void transfere(Conta conta, Double quantidade) {
-        if (this.saldo + this.limite >= quantidade) {
+        if (this.saldo >= quantidade) {
             this.saldo -= quantidade;
             conta.deposita(quantidade);
         }
-    }
-    @Override
-    public String toString() {
-        return "Conta{" +
-                "numero=" + numero +
-                ", cliente='" + cliente + '\'' +
-                ", saldo=" + saldo +
-                ", limite=" + limite +
-                '}';
     }
 }
